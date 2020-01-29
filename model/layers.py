@@ -15,9 +15,10 @@ def conv2d(x, filter_shape, name, activation=None, use_bias=True, kernel_initial
     :param kwargs: another params passed to tf.nn.conv2d. strides and padding must be assigned.
     :return: output Tensor
     """
-    filter_shape = filter_shape if callable(kernel_initializer) else None
     with tf.variable_scope(name):
+        filter_shape = filter_shape if callable(kernel_initializer) else None
         w = tf.get_variable("w", shape=filter_shape, initializer=kernel_initializer)
+        filter_shape = w.shape
         if use_bias:
             bias_shape = (filter_shape[-1],) if callable(bias_initializer) else None
             b = tf.get_variable(name="b", shape=bias_shape, initializer=bias_initializer)
@@ -45,9 +46,10 @@ def conv2d_transpose(x, filter_shape, name, activation=None, use_bias=True,
     :param kwargs: padding, strides, output_shape
     :return:
     """
-    filter_shape = filter_shape if callable(kernel_initializer) else None
     with tf.variable_scope(name):
+        filter_shape = filter_shape if callable(kernel_initializer) else None
         w = tf.get_variable("w", shape=filter_shape, initializer=kernel_initializer)
+        filter_shape = w.shape
         if use_bias:
             bias_shape = (filter_shape[-2],) if callable(bias_initializer) else None
             b = tf.get_variable(name="b", shape=bias_shape, initializer=bias_initializer)
