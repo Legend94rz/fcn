@@ -2,7 +2,6 @@ import tensorflow as tf
 import os
 import cv2
 import numpy as np
-from pathlib import Path
 from tensorflow.python.ops import control_flow_ops
 
 from PIL import Image
